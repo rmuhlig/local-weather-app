@@ -11,11 +11,10 @@ describe('CurrentWeatherComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CurrentWeatherComponent ],
+      declarations: [CurrentWeatherComponent],
       imports: [HttpClientTestingModule],
-      providers: [{provide: WeatherService, useClass: WeatherServiceFake}]
-    })
-    .compileComponents();
+      providers: [{ provide: WeatherService, useClass: WeatherServiceFake }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

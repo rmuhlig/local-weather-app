@@ -7,7 +7,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent, CurrentWeatherComponent],
-      providers: [{provide: WeatherService, useClass: WeatherServiceFake}]
+      providers: [{ provide: WeatherService, useClass: WeatherServiceFake }]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
 interface ICurrentWeatherData {
   weather: [
     {
-      description: string,
-      icon: string
+      description: string;
+      icon: string;
     }
-    ];
+  ];
   main: {
-    temp: number
+    temp: number;
   };
   sys: {
-    country: string,
+    country: string;
   };
   dt: number;
   name: string;
@@ -28,11 +28,12 @@ export interface IWeatherService {
 
 @Injectable()
 export class WeatherService implements IWeatherService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) {
-  }
-
-  private transformToICurrentWeather(data: ICurrentWeatherData): ICurrentWeather {
+  private transformToICurrentWeather(
+    data: ICurrentWeatherData
+  ): ICurrentWeather {
+    console.log(data);
     return {
       city: data.name,
       country: data.sys.country,
@@ -44,16 +45,15 @@ export class WeatherService implements IWeatherService {
   }
 
   private convertKelvinToFahrenheit(kelvin: number): number {
-    return kelvin * 9 / 5 - 459.67;
+    return (kelvin * 9) / 5 - 459.67;
   }
 
   getCurrentWeather(city: string, country: string) {
     return this.httpClient
-      .get<ICurrentWeatherData>
-      (`${environment.baseUrl}api.openweathermap.org/data/2.5/weather?` + `q=${city},${country}&appid=${environment.appId}`)
-      .pipe(
-        map(d => this.transformToICurrentWeather(d))
-      );
+      .get<ICurrentWeatherData>(
+        `${environment.baseUrl}api.openweathermap.org/data/2.5/weather?` +
+          `q=${city},${country}&appid=${environment.appId}`
+      )
+      .pipe(map(d => this.transformToICurrentWeather(d)));
   }
-
 }
